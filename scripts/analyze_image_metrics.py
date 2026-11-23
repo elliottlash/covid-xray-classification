@@ -21,7 +21,6 @@ else:
     metrics_df = pd.read_csv(metrics_file)
     print(metrics_df.head())
 
-metrics_df = metrics_df[metrics_df['class'] != "Lung_Opacity"]
 
 
 plot_histogram_classes(metrics_df, column='avg_contrast', class_col='class', 
