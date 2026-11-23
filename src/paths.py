@@ -1,5 +1,6 @@
 from pathlib import Path
 
+
 def get_dataset_paths():
     '''
     This function outputs the names of the four classes of images in the dataset.
@@ -31,4 +32,3 @@ if __name__ == "__main__":
     classes, image_files, masks = get_dataset_paths()
     for class_name, image, mask in zip(classes, image_files, masks):
         print(f"{class_name}: {len(image)} images, {len(mask)} masks")
-
