@@ -13,7 +13,6 @@ if __name__ == "__main__":
     #Get Paths
     class_names, filepaths, maskpaths = get_dataset_paths()
 
-
     #Extract metrics for each class of image
     avg_contr_list, avg_bright_list, lapl_var_list = extract_all_metrics(filepaths, maskpaths)
 
