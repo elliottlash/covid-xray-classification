@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import cv2
+import seaborn as sns
 
 def plot_image(img, save_path=None, title=None):
     """
@@ -41,3 +42,30 @@ def read_image(image_path):
     if img is None:
         raise FileNotFoundError(f"Image not found at {image_path}")
     return img
+
+
+def plot_histogram_classes(data, column, class_col, title=None, xlabel=None, save_path=None):
+    """
+    Plots a histogram for the specified column in the data.
+
+    Parameters:
+    data (pandas.DataFrame): The data containing the column to plot.
+    column (str): The name of the column to plot.
+    class_col (str): The name of the column containing the class labels.
+    title (str, optional): Title for the plot.
+    xlabel (str, optional): Label for the x-axis.
+    save_path (str, optional): Path to save the plotted histogram. If None, the histogram will not be saved.
+
+    Returns:
+    fig, ax: The matplotlib figure and axes objects.
+    """
+   
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.kdeplot(data=data, x=column, common_norm=False,
+                hue=class_col, ax=ax)
+    ax.set_xlabel(xlabel, fontweight='bold')
+    ax.set_ylabel("Density", fontweight='bold')
+    ax.set_title(title, fontweight='bold')
+    fig.savefig(save_path)
+
+    return fig, ax

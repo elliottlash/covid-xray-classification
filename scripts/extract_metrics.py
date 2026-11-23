@@ -1,6 +1,5 @@
 from pathlib import Path
 import sys
-import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -14,9 +13,6 @@ if __name__ == "__main__":
     #Get Paths
     class_names, filepaths, maskpaths = get_dataset_paths()
 
-    #Temporary Test (first 5 images per class)
-    filepaths = [fp[:5] for fp in filepaths]
-    maskpaths = [mp[:5] for mp in maskpaths]
 
     #Extract metrics for each class of image
     avg_contr_list, avg_bright_list, lapl_var_list = extract_all_metrics(filepaths, maskpaths)
