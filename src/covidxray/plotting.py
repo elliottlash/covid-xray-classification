@@ -44,7 +44,7 @@ def read_image(image_path):
     return img
 
 
-def plot_histogram_classes(data, column, class_col, title=None, xlabel=None, save_path=None):
+def plot_histogram_classes(data, column, class_col, title=None, xlabel=None, save_path=None, grid=True):
     """
     Plots a histogram for the specified column in the data.
 
@@ -63,9 +63,36 @@ def plot_histogram_classes(data, column, class_col, title=None, xlabel=None, sav
     fig, ax = plt.subplots(figsize=(10, 6))
     sns.kdeplot(data=data, x=column, common_norm=False,
                 hue=class_col, ax=ax)
-    ax.set_xlabel(xlabel, fontweight='bold')
-    ax.set_ylabel("Density", fontweight='bold')
-    ax.set_title(title, fontweight='bold')
+    ax.set_xlabel(xlabel, fontweight='bold', fontsize=14)
+    ax.set_ylabel("Density", fontweight='bold', fontsize=14)
+    ax.set_title(title, fontweight='bold', fontsize=17)
+    if grid:
+        ax.grid(True, linestyle='--', alpha=0.7)
     fig.savefig(save_path)
 
+    return fig, ax
+
+
+def plot_boxplots_classes(data, column, class_col, title=None, xlabel=None, ylabel=None, save_path=None):
+    """
+    Plots boxplots for the specified column in the data.
+
+    Parameters:
+    data (pandas.DataFrame): The data containing the column to plot.
+    column (str): The name of the column to plot.
+    class_col (str): The name of the column containing the class labels.
+    title (str, optional): Title for the plot.
+    xlabel (str, optional): Label for the x-axis.
+    save_path (str, optional): Path to save the plotted boxplots. If None, the boxplots will not be saved.
+
+    Returns:
+    fig, ax: The matplotlib figure and axes objects.
+    """
+
+    fig, ax = plt.subplots(1, figsize=(10, 6))
+    sns.boxplot(x=class_col, y=column, data=data, ax=ax)
+    ax.set_xlabel(xlabel, fontweight='bold', fontsize=14)
+    ax.set_ylabel(ylabel, fontweight='bold', fontsize=14)
+    ax.set_title(title, fontweight='bold', fontsize=17)
+    fig.savefig(save_path)
     return fig, ax
